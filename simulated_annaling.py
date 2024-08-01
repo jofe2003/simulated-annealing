@@ -1,27 +1,11 @@
 import random
 import math
-import numpy as np
-
-from matplotlib import pyplot as plt
+from plot.Plot import Plot
 
 def function(x, y):
     return (x-1)**2+(y-1)**2
 
 
-def plot(x, y, z):
-
-    x_f = np.linspace(min(x), max(x), 100)
-    y_f = np.linspace(min(y), max(y), 100)
-    x_f, y_f = np.meshgrid(x_f, y_f)
-
-    # Passo 4: Calcular os Valores da Função
-    z_f = function(x_f, y_f)
-    
-    ax = plt.axes(projection="3d")
-
-    ax.plot_surface(x_f, y_f, z_f, cmap='viridis')
-    ax.scatter(x, y, z, s=10, color='r')
-    plt.show()
 
 def program():
     rate = 0.001
@@ -57,8 +41,8 @@ def program():
                 y_t = y_tplus1
 
         temp_init = temp_init*(1-rate)
-
-    plot(x[::10], y[::10], z[::10])
+    plot = Plot()
+    plot.plot(x[::10], y[::10], z[::10], function)
 
 program()
 
