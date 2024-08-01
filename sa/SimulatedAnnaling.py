@@ -2,6 +2,7 @@ import random
 import math
 import numpy as np
 
+
 class SimulatedAnnaling:
     def __init__(self, rate, T, model, T_min):
         self.rate = rate
@@ -31,37 +32,4 @@ class SimulatedAnnaling:
                     self.model = model_tplus1
 
             self.T *= (1-self.rate)
-            # print(self.T)
         return best_model
-
-class Model:
-    def __init__(self, x, y, f):
-        self.x = x
-        self.y = y
-        self.f = f
-
-    def next_state(self):
-        return Model(self.x + random.uniform(-1, 1), self.y + random.uniform(-1, 1), self.f)
-    
-    def calculate(self):
-        return self.f(self.x, self.y)
-    
-    def toString(self):
-        print(f"x:{self.x}\ny:{self.y}\nf:{self.f(self.x, self.y)}")
-    
-def function(x, y):
-    return x**2 + y**2
-
-def main():
-    model = Model(random.uniform(-1, 1), random.uniform(-1, 1), function)
-
-    sa = SimulatedAnnaling(0.0001, 10000, model, 0.000000001)
-
-    model = sa.minimize()
-
-    model.toString()
-main()
-    
-
-
-
